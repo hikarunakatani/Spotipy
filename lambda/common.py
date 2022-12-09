@@ -81,7 +81,7 @@ def authenticate():
     return sp
 
 
-def send_email():
+def send_email(log_value):
     """Send an email form AWS SNS.
     """
 
@@ -96,7 +96,7 @@ def send_email():
     params = {
         'TopicArn': os.environ['TOPIC_ARN'],
         'Subject': 'Lambda process completed!',
-        'Message': 'Your request has been successfully processed!'
+        'Message': log_value
     }
 
     client.publish(**params)

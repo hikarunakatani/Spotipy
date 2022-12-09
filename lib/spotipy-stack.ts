@@ -6,6 +6,7 @@ import { Rule, Schedule } from "aws-cdk-lib/aws-events";
 import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
 import { Topic } from "aws-cdk-lib/aws-sns";
 import { EmailSubscription } from "aws-cdk-lib/aws-sns-subscriptions";
+import * as apigw from 'aws-cdk-lib/aws-apigateway';
 import * as iam from "aws-cdk-lib/aws-iam";
 
 export class SpotipyStack extends cdk.Stack {
@@ -50,6 +51,11 @@ export class SpotipyStack extends cdk.Stack {
       environment: {
         TOPIC_ARN: topic.topicArn,
       },
+    });
+
+    // defines an API Gateway REST API resource backed by lambda function.
+    new apigw.LambdaRestApi(this, 'Endpoint', {
+      handler: lambda
     });
 
     // Define an EventBridge rule

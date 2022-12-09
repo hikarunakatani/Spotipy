@@ -2,13 +2,4 @@
 
 SpotifyAPIを用いたサーバーレスアプリをAWS CDKで実装する試みです。
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+![構成図](https://user-images.githubusercontent.com/49630942/206726581-4e463a3d-1c1e-4c1b-a0c8-4f54fd5d934e.PNG)

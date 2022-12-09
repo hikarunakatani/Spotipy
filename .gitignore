@@ -6,7 +6,9 @@ lambda_layer
 lambda_venv
 *.pptx
 secret.txt
-
+*.pyc
+*.png
+*.cache-Hikaru
 # CDK asset staging directory
 .cdk.staging
 cdk.out

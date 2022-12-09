@@ -4,6 +4,7 @@ import common
 import argparse
 import random
 
+
 username = 'Hikaru'
 
 
@@ -95,12 +96,6 @@ def playback_song(song_name):
 
     track_uri = results['tracks']['items'][0]['uri']
     sp.start_playback(device_id, uris=[track_uri])
-
-
-def invoked_process():
-    """Fucntion to execute when invoked from lambda handler
-    """
-    diggin_in_the_crate(1)
 
 
 def main():
