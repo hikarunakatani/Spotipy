@@ -8,7 +8,7 @@ username = 'Hikaru'
 
 
 def diggin_in_the_crate(num_tracks=30):
-    """Executes searching completely random songs.
+    """Search completely random songs.
 
 
     Args:
@@ -67,7 +67,7 @@ def diggin_in_the_crate(num_tracks=30):
                     track_artists.append(
                         results['tracks']['items'][0]['artists'][0]['name'])
 
-                # idを格納
+                # Add track ids
                 track_ids.append((results['tracks']['items'][0]['id']))
                 print('Added {} - {} to the playlist.'.format(track_name,
                       ','.join(track_artists)))

@@ -3,6 +3,7 @@
 *.d.ts
 node_modules
 lambda_layer
+lambda_venv
 *.pptx
 secret.txt
 

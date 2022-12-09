@@ -1,7 +1,6 @@
 # Spotipy-Serverless
 
 SpotifyAPIを用いたサーバーレスアプリをAWS CDKで実装する試みです。
-1.Secrets Managerにシークレットを登録
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 

@@ -14,8 +14,7 @@ playlist_id = '07bihVSXGsycvuii4zNuMu'
 
 
 def get_random_search():
-    """
-    Get a random character of unicode.
+    """Get a random character of unicode.
     """
 
     rand_char = ''
@@ -36,8 +35,7 @@ def get_random_search():
 
 
 def get_secret():
-    """
-    Get secrets values from AWS Secrets Manager.
+    """Get secrets values from AWS Secrets Manager.
     """
 
     secret_name = "spotipy-secret"
@@ -71,8 +69,7 @@ def get_secret():
 
 
 def authenticate():
-    """
-    Execute authentication on process spotify.
+    """Execute authentication on process spotify.
     """
     secret = get_secret()
 
@@ -85,6 +82,8 @@ def authenticate():
 
 
 def send_email():
+    """Send an email form AWS SNS.
+    """
 
     region_name = "us-east-1"
 
