@@ -8,7 +8,8 @@ import { Topic } from "aws-cdk-lib/aws-sns";
 import { EmailSubscription } from "aws-cdk-lib/aws-sns-subscriptions";
 import * as apigw from 'aws-cdk-lib/aws-apigateway';
 import * as iam from "aws-cdk-lib/aws-iam";
-
+import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
+import secretValue from '../secret.json'
 export class SpotipyStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -19,6 +20,15 @@ export class SpotipyStack extends cdk.Stack {
     });
 
     topic.addSubscription(new EmailSubscription("hikamichael@hotmail.co.jp"));
+
+
+    
+    const secret = new secretsmanager.Secret(this, 'spotipy-secret', {
+      generateSecretString: {
+        secretStringTemplate: JSON.stringify(secretValue),
+        generateStringKey: 'password',
+      },
+    });
 
     // Define a role for lambda
     const lambdaRole = new iam.Role(this, "lambdaRole", {
@@ -50,16 +60,17 @@ export class SpotipyStack extends cdk.Stack {
       timeout: cdk.Duration.minutes(15),
       environment: {
         TOPIC_ARN: topic.topicArn,
+        SECRET_ARN: secret.secretArn,
       },
     });
 
     // defines an API Gateway REST API resource backed by lambda function.
-    new apigw.LambdaRestApi(this, 'Endpoint', {
+    const apigateway =  new apigw.LambdaRestApi(this, 'Endpoint', {
       handler: lambda
     });
 
     // Define an EventBridge rule
-    new Rule(this, "RuleToInvokeLambda", {
+    const rule = new Rule(this, "RuleToInvokeLambda", {
       schedule: Schedule.cron({
         minute: "0",
         hour: "0",
@@ -69,5 +80,6 @@ export class SpotipyStack extends cdk.Stack {
       }),
       targets: [new LambdaFunction(lambda)],
     });
+
   }
 }

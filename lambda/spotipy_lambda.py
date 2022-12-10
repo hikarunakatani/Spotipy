@@ -5,9 +5,6 @@ import argparse
 import random
 
 
-username = 'Hikaru'
-
-
 def diggin_in_the_crate(num_tracks=30):
     """Search completely random songs.
 
@@ -17,9 +14,9 @@ def diggin_in_the_crate(num_tracks=30):
     """
 
     sp = common.authenticate()
-
-    playlist_id = '07bihVSXGsycvuii4zNuMu'
-
+    secret = common.get_secret()
+    username = secret['username']
+    playlist_id = secret['playlist_id']
     current_items = sp.playlist_items(playlist_id)
 
     if current_items['items']:
@@ -53,23 +50,22 @@ def diggin_in_the_crate(num_tracks=30):
         results = sp.search(type='track', offset=randomOffset,
                             limit=1, q=query, market=[random_market])
 
-        if results is None:
-            print('NoneType')
-
-        else:
+        if results is not None:
             if len(results['tracks']['items']) >= 1:
-                track_name = results['tracks']['items'][0]['name']
+
+                track = results['tracks']['items'][0]
+                track_name = track['name']
 
                 # When there are multiple artists
-                if len(results['tracks']['items'][0]['artists']) >= 2:
-                    for artist in results['tracks']['items'][0]['artists']:
+                if len(track['artists']) >= 2:
+                    for artist in track['artists']:
                         track_artists.append(artist['name'])
                 else:
                     track_artists.append(
-                        results['tracks']['items'][0]['artists'][0]['name'])
+                        track['artists'][0]['name'])
 
                 # Add track ids
-                track_ids.append((results['tracks']['items'][0]['id']))
+                track_ids.append((track['id']))
                 print('Added {} - {} to the playlist.'.format(track_name,
                       ','.join(track_artists)))
                 track_artists.clear()

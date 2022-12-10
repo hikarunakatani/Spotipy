@@ -38,7 +38,7 @@ def get_secret():
     """Get secrets values from AWS Secrets Manager.
     """
 
-    secret_name = "spotipy-secret"
+    secret_name = os.environ['SECRET_ARN']
     region_name = "us-east-1"
 
     # Create a Secrets Manager client
