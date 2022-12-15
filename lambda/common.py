@@ -7,11 +7,7 @@ from botocore.exceptions import ClientError
 import random
 import os
 
-
-username = 'Hikaru'
 scope = 'playlist-read-private playlist-modify-public'
-playlist_id = '07bihVSXGsycvuii4zNuMu'
-
 
 def get_random_search():
     """Get a random character of unicode.
@@ -22,16 +18,16 @@ def get_random_search():
     while rand_char == '':
         rand_char = chr(random.randint(0, 1114111))
 
-    randomSearch = ''
+    random_search = ''
 
     if random.randint(0, 2) == 0:
-        randomSearch = rand_char + '%'
+        random_search = rand_char + '%'
     elif random.randint(0, 2) == 1:
-        randomSearch = '%' + rand_char + '%'
+        random_search = '%' + rand_char + '%'
     else:
-        randomSearch = '%' + rand_char
+        random_search = '%' + rand_char
 
-    return randomSearch
+    return random_search
 
 
 def get_secret():
@@ -74,7 +70,7 @@ def authenticate():
     secret = get_secret()
 
     token = util.prompt_for_user_token(
-        username, scope, secret['my_id'], secret['my_secret'], secret['redirect_uri'])
+        secret['username'], scope, secret['my_id'], secret['my_secret'], secret['redirect_uri'])
 
     sp = spotipy.Spotify(auth=token)
 

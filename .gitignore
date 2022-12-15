@@ -5,7 +5,7 @@ node_modules
 lambda_layer
 lambda_venv
 *.pptx
-*.pyc
+__pycache__
 *.png
 *.cache-Hikaru
 # CDK asset staging directory

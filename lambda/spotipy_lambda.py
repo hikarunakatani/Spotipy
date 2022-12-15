@@ -35,6 +35,7 @@ def diggin_in_the_crate(num_tracks=30):
     track_ids = []
     track_name = ''
     track_artists = []
+    query_list = []
 
     print("Start searching...")
 
@@ -44,10 +45,11 @@ def diggin_in_the_crate(num_tracks=30):
         random_market = country_codes[random.randint(0, country_num - 1)]
 
         query = common.get_random_search()
+        query_list.append(query)
 
-        randomOffset = random.randint(0, 999)
+        random_offset = random.randint(0, 999)
 
-        results = sp.search(type='track', offset=randomOffset,
+        results = sp.search(type='track', offset=random_offset,
                             limit=1, q=query, market=[random_market])
 
         if results is not None:
@@ -75,6 +77,7 @@ def diggin_in_the_crate(num_tracks=30):
 
     sp.user_playlist_add_tracks(username, playlist_id, track_ids)
     print("Updated playlist.")
+    print(query_list)
 
 
 def playback_song(song_name):
